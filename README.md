@@ -8,7 +8,8 @@ The schema is created using a = PostgreSQL relational database in a star schema,
 Structure
 The project contains the following elements:
 
-data/ contains song and log files of user activity in JSON format
+data/ contains song and log files of user activity in JSON format.
+
 sql_queries.py creates the tables and how to insert data in each table using SQL queries.
 create_tables.py creates the Sparkify database and connects the database to a opensource postgresSQL platform i.e pgAdmin4.
 etl.py defines the ETL pipeline, which pulls and transforms the song and log JSON files in the local directory and inserts them into the Postgres database

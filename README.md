@@ -1,18 +1,21 @@
 Sparkify Database - Schema and ETL
 
-Overview
+#Overview
 This project provides the schema and ETL to create and populate a database for the data analysis by a music streaming app Sparkify.
 
-The schema is created using a = PostgreSQL relational database in a star schema, which allows the Sparkify team to readily run queries to analyze user activity on their app, such as on what songs users are listening to. The scripts have been created in Python using pyscopgg as python wrapper and connector.
+The schema is created using a PostgreSQL relational database in a star schema, which allows the Sparkify team to readily run queries to analyze user activity on their app, such as on what songs users are listening to. The scripts have been created in Python using pyscopg2 as python and connector.
 
-Structure
+#Structure
 The project contains the following elements:
 
 data/ contains song and log files of user activity in JSON format.
 
 sql_queries.py creates the tables and how to insert data in each table using SQL queries.
+
 create_tables.py creates the Sparkify database and connects the database to a opensource postgresSQL platform i.e pgAdmin4.
+
 etl.py defines the ETL pipeline, which pulls and transforms the song and log JSON files in the local directory and inserts them into the Postgres database
+
 etl.ipynb and test.ipynb test some of the elements contained in the Python scripts
 Schema
 The database contains the following fact table:

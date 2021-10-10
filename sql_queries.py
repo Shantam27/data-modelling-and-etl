@@ -9,8 +9,8 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 songplay_table_create = ("""Create Table if not exists songplays 
                         ( songplay_id serial PRIMARY KEY,
-                        start_time bigint,
-                        user_id INT,
+                        start_time timestamp NOT NULL,
+                        user_id INT NOT NULL,
                         level varchar,
                         song_id VARCHAR,
                         artist_id VARCHAR,
@@ -47,7 +47,7 @@ artist_table_create = ("""CREATE TABLE IF NOT EXISTS artists
 """)
 
 time_table_create = ("""CREATE TABLE IF NOT EXISTS time
-                        (start_time bigint PRIMARY KEY,
+                        (start_time timestamp PRIMARY KEY,
                         hour int,
                         day int,
                         week int,
@@ -66,12 +66,12 @@ songplay_table_insert = ("""INSERT INTO songplays (songplay_id,start_time,user_i
 
 user_table_insert = ("""INSERT INTO users (user_id, first_name, last_name, gender, level)
                             VALUES (%s, %s, %s, %s, %s)
-                           ON CONFLICT DO NOTHING
+                           ON CONFLIT(user_id) DO UPDATE SET level =excluded.level
 """)
 
 song_table_insert = ("""INSERT INTO songs (song_id, title, artist_id, year, duration)
                             VALUES (%s, %s, %s, %s, %s)
-                           
+                           ON CONFLICT DO NOTHING
 """)
 
 artist_table_insert = ("""INSERT INTO artists (artist_id,name,location,latitude, longitude)
@@ -86,6 +86,9 @@ time_table_insert = ("""INSERT Into time (start_time, hour, day, week , month, y
 """)
 
 # FIND SONGS
+
+"""This query is created to extract song_id and artist_id from song and artist tables 
+and load it in song_id and artist_id column in songplays table"""
 
 song_select = ("""SELECT s.song_id, a.artist_id 
                 FROM artists a

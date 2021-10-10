@@ -34,16 +34,7 @@ run create_tables.py
 run etl.py
 Make sure your working directory is at the top-level of the project.
 
-Softwares needed:
-Python 3, NumPy, and Pandas installed using Anaconda.
-A text editor like Jupyter Notebook.
-A terminal application like Git Bash.
-Opensource PosgreSQL admin platform such as pgadmin4 
 
-Installation links for softwares:
-Git for windows - for terminal application using Git Bash: https://git-scm.com/download/win
-Anaconda for windows: https://docs.anaconda.com/anaconda/install/windows/
-pgadmin for windows: https://www.pgadmin.org/download/pgadmin-4-windows/
 
 Query Example
 Once you've created the database and run the ETL pipeline, you can test out some queries:

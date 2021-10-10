@@ -25,6 +25,17 @@ songplays has foreign keys to the following dimension tables:
 * artists
 * time
 
+#### Softwares needed:
+Python 3, NumPy, and Pandas installed using Anaconda.
+A text editor like Jupyter Notebook.
+A terminal application like Git Bash.
+Opensource PosgreSQL admin platform such as pgadmin4 
+
+#### Installation links for softwares:
+Git for windows - for terminal application using Git Bash: https://git-scm.com/download/win
+Anaconda for windows: https://docs.anaconda.com/anaconda/install/windows/
+pgadmin for windows: https://www.pgadmin.org/download/pgadmin-4-windows/
+
 #### Instructions
 To run the project: Connect to any local PostgreSQL administration platform and connect to the database through a user. To execute the python files, Gitbash is being used using Anaconda.Below files are executed in the bash shell 
 

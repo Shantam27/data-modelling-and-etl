@@ -40,10 +40,12 @@ def process_log_file(cur, filepath):
     df = df[df['page']== 'NextSong']
 
     # convert timestamp column to datetime
-    t = pd.to_datetime(df["ts"])
+    t = pd.to_datetime(df["ts"], unit ='ms')
+    #start_time = pd.Timestamp(df['ts'])
     
+    df["ts"] = pd.to_datetime(df["ts"], unit='ms')
     # insert time data records
-    time_data = [df.ts.values,t.dt.hour.values,t.dt.day.values,t.dt.isocalendar().week.values,t.dt.month.values,t.dt.year.values,t.dt.dayofweek]
+    time_data = [t.values,t.dt.hour.values,t.dt.day.values,t.dt.isocalendar().week.values,t.dt.month.values,t.dt.year.values,t.dt.dayofweek]
     column_labels = ["start_time","hour", "day", "week", "month", "year", "weekday"]
     time_df = pd.DataFrame(dict(zip(column_labels,time_data)))
 
@@ -70,13 +72,13 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = (row.ts, row.userId, row.level, songid, artistid, row.sessionId, row.location,row.userAgent)
+        songplay_data = (pd.Timestamp(row.ts), row.userId, row.level, songid, artistid, row.sessionId, row.location,row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
 
 """This function applies song and log processing to all data files.
 Uses process_song_file() and process_log_file() function to every file in
-data/song_data and data/log_data respectively
-"""
+data/song_data and data/log_data respectively."""
+
 def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
 
@@ -101,8 +103,8 @@ def main():
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=postgres")
     cur = conn.cursor()
 
-    process_data(cur, conn, filepath= r'C:\Users\shanz\Downloads\project-template\data\song_data', func=process_song_file)
-    process_data(cur, conn, filepath= r'C:\Users\shanz\Downloads\project-template\data\log_data', func=process_log_file)
+    process_data(cur, conn, filepath= r'C:\Users\shanz\project\data\song_data', func=process_song_file)
+    process_data(cur, conn, filepath= r'C:\Users\shanz\project\data\log_data', func=process_log_file)
 
     conn.close()
 
